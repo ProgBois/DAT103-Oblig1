@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#Argumentene er filer.
+for filer in "$@"
+do
+    exec ./filkontroll.sh $filer 60 &
+done

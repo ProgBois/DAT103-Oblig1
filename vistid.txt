@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#Argument 1 er en hendelse
+read -p "Hva er hendelsen? " hendelse
+echo "$(grep "$hendelse" $1 | cut -f2 -d " " | paste -sd+ | bc)"

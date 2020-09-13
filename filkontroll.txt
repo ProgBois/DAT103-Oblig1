@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#Argument 1 er filen, 2 er tidsintervallet (default er sekunder)
+if [ ! -f $1 ]
+then
+    while true
+    do
+        if [ -f $1 ]; then
+            echo Filen "$1" ble opprettet
+            exit
+        fi
+        sleep $2
+    done
+else
+    mtime=$(stat --format "%Y" $1)
+    while true
+    do
+        if [ ! -f $1 ]; then
+            echo Filen "$1" ble slettet
+            exit
+
+        else
+            mtime2=$(stat --format "%Y" $1)
+            if [ $mtime2 -gt $mtime ]; then
+                echo Filen "$1" ble endret
+                exit
+            fi
+        fi
+        sleep $2
+    done
+fi
